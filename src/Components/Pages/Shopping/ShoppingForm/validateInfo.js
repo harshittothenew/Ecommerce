@@ -33,7 +33,13 @@ export default function validateInfo(values) {
           errors.username4="maximum 10 character is required"
       }
       
-     
+      if (!values.number2) {
+        errors.number2 = 'mobile no is required';
+      }
+      else if (!/^[6-9]\d{9}$/i.test(values.number2)){
+        errors.number2="mobile no is wrong";
+      }
+      
   
     
     if (!values.number1) {
@@ -41,11 +47,7 @@ export default function validateInfo(values) {
     } else if (values.number1.length > 6) {
       errors.number1 = 'Zipcode needs to be maximum 6 characters ';
     }
-  
-    if (!values.number2) {
-      errors.number2 = 'mobile no is required';
-    }
-    
+
     
     return errors;
   }

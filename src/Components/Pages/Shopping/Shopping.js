@@ -1,15 +1,14 @@
-import React from 'react'
-import ShoppingCart from './ShoppingCart'
-import ShoppingDetails from './ShoppingDetails'
-
+import React from "react";
+import ShoppingCart from "./ShoppingCart";
+import ShoppingDetails from "./ShoppingDetails";
 
 const Shopping = () => {
-    return (
-        <div>
-            <ShoppingCart /> 
-            <ShoppingDetails />
-        </div>
-    )
-}
+  return (
+    <div>
+      <ShoppingCart />
+      <ShoppingDetails />
+    </div>
+  );
+};
 
-export default Shopping
+export default Shopping;

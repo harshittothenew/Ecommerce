@@ -3,21 +3,16 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  useParams,
-  useLocation,
 } from "react-router-dom";
 import "./App.css";
 import Home from "./Components/Pages/Home/Home";
-import Shopping from "./Components/Pages/Shopping/Shopping";
 import Header from "./Components/Shared Resources/Header";
 import SingleProduct from "./Components/Pages/Single Product/SingleProduct";
-import Random2 from "./Random2";
-import MyContext from "./Store/MyContext";
-import Random from "./Random";
-import Payment from "./Payment/Payment";
 import AboutUs from "./Components/Pages/AboutUs/AboutUs";
-import HelpUs from "./Components/Pages/HelpUs/HelpUs";
-import Random1 from "./Random1";
+import ContinueShopping from "./Components/Pages/ContinueShopping/ContinueShopping";
+import ShoppingTabs from "./Components/Pages/Shopping/ShoppingTabs";
+import Footer from "./Components/Shared Resources/Footer";
+
 
 function App() {
   return (
@@ -25,20 +20,14 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/cart" exact component={Random2} />
+          <Route path="/cart" exact component={ShoppingTabs} />
           <Route path="/" exact component={Home} />
           <Route path="/about" exact component={AboutUs} />
-          <Route path="/helpus" exact component={HelpUs} />
           <Route path={"/product/:id"} exact component={SingleProduct} />
-          {/* <Payment /> */}
+          <Route path="/continue_shopping" exact component={ContinueShopping} />
         </Switch>
-        <Random1 />
+        <Footer />
       </BrowserRouter>
-
-      {/* <Switch>
-          <Route path="/cart" component={Shopping} />
-          <Route path="/" exact component={Home} />
-        </Switch> */}
     </div>
   );
 }

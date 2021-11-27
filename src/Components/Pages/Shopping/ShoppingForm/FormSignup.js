@@ -1,35 +1,86 @@
-import React from "react";
-import validate from './validateInfo';
-import useForm from './useForm';
- 
-const FormSignup = ({ submitForm}) => {
-    const { handleChange, handleSubmit, values, errors } = useForm(
-      submitForm,
-      validate
-    );
-    console.log(errors);
-  
+import React, { useState } from "react";
+import validateInfo from "./validateInfo";
+
+const FormSignup = ({ submitForm, setToggleState }) => {
+  const [next, setNext] = useState("1");
+
+  const [values, setValues] = useState({
+    username: "",
+    username1: "",
+    username2: "",
+    username3: "",
+    username4: "",
+    number1: "",
+    number2: "",
+  });
+
+  const [errors, setErrors] = useState({
+    username: "",
+    username1: "",
+    username2: "",
+    username3: "",
+    username4: "",
+    number1: "",
+    number2: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const error = validateInfo(values);
+    if (Object.keys(error).length) {
+      setErrors(error);
+    } else {
+      setToggleState(3);
+    }
+  };
+
   return (
     <div className="ps-5">
       <h1>Shipping Details</h1>
-      <hr />
+      <hr className={`text-sm`} />
       <form className="row g-3" onSubmit={handleSubmit}>
         <div className="col-md-6">
-          <label for="firstname" className="form-label">
+          <label htmlFor="firstname" className="form-label">
             First Name
           </label>
-          <input type="text" className="form-control" id="firstname" name='username' value={values.username} onChange={handleChange}/>
-          {errors.username && <p>{errors.username}</p>}
-           </div>
+          <input
+            type="text"
+            className="form-control"
+            id="firstname"
+            name="username"
+            value={values.username}
+            onChange={handleChange}
+          />
+          {errors.username && (
+            <p className={`text-danger mb-0`}>{errors.username}</p>
+          )}
+        </div>
         <div className="col-md-6">
-          <label for="lastname" className="form-label">
+          <label htmlFor="lastname" className="form-label">
             Last Name
           </label>
-          <input type="text" className="form-control" id="lastname" name='username1' value={values.username1} onChange={handleChange} />
-          {errors.username1 && <p>{errors.username1}</p>}
+          <input
+            type="text"
+            className="form-control"
+            id="lastname"
+            name="username1"
+            value={values.username1}
+            onChange={handleChange}
+          />
+          {errors.username1 && (
+            <p className={`text-danger mb-0`}>{errors.username1}</p>
+          )}
         </div>
         <div className="col-12">
-          <label for="inputAddress" className="form-label">
+          <label htmlFor="inputAddress" className="form-label">
             Address
           </label>
           <input
@@ -37,12 +88,16 @@ const FormSignup = ({ submitForm}) => {
             className="form-control"
             id="inputAddress"
             placeholder="1234 Main St"
-            name='username2' value={values.username2} onChange={handleChange}
+            name="username2"
+            value={values.username2}
+            onChange={handleChange}
           />
-           {errors.username2 && <p>{errors.username2}</p>}
+          {errors.username2 && (
+            <p className={`text-danger mb-0`}>{errors.username2}</p>
+          )}
         </div>
         <div className="col-12">
-          <label for="inputAddress2" className="form-label">
+          <label htmlFor="inputAddress2" className="form-label">
             Address 2
           </label>
           <input
@@ -50,85 +105,129 @@ const FormSignup = ({ submitForm}) => {
             className="form-control"
             id="inputAddress2"
             placeholder="Apartment, studio, or floor"
-            name='username3' value={values.username3} onChange={handleChange}
+            name="username3"
+            value={values.username3}
+            onChange={handleChange}
           />
-           {errors.username3 && <p>{errors.username3}</p>}
+          {errors.username3 && (
+            <p className={`text-danger mb-0`}>{errors.username3}</p>
+          )}
         </div>
         <div className="col-md-6">
-          <label for="inputState" className="form-label">
+          <label htmlFor="inputState" className="form-label">
             State
           </label>
           <select id="inputState" className="form-select">
-          <option selected active>Uttar Pradesh</option>
-          <option selected>Haryana</option>
-          <option selected>Punjab</option>
-          <option selected>Delhi</option>
+            <option selected active>
+              Uttar Pradesh
+            </option>
+            <option selected>Haryana</option>
+            <option selected>Punjab</option>
+            <option selected>Delhi</option>
           </select>
         </div>
         <div className="col-md-6">
-          <label for="inputCity" className="form-label">
+          <label htmlFor="inputCity" className="form-label">
             City
           </label>
-          <input type="text" className="form-control" id="inputCity"  name='username4' value={values.username4} onChange={handleChange} />
-          {errors.username4 && <p>{errors.username4}</p>}
+          <input
+            type="text"
+            className="form-control"
+            id="inputCity"
+            name="username4"
+            value={values.username4}
+            onChange={handleChange}
+          />
+          {errors.username4 && (
+            <p className={`text-danger mb-0`}>{errors.username4}</p>
+          )}
         </div>
         <div className="col-md-6">
-          <label for="inputZip" className="form-label">
+          <label htmlFor="inputZip" className="form-label">
             Zip
           </label>
-          <input type="text" className="form-control" id="inputZip"  name='number1' value={values.number1} onChange={handleChange}/>
-          {errors.number1 && <p>{errors.number1}</p>}
+          <input
+            type="text"
+            className="form-control"
+            id="inputZip"
+            name="number1"
+            value={values.number1}
+            onChange={handleChange}
+          />
+          {errors.number1 && (
+            <p className={`text-danger mb-0`}>{errors.number1}</p>
+          )}
         </div>
         <div className="col-md-6">
-          <label for="mobile" className="form-label">
+          <label htmlFor="mobile" className="form-label">
             Mobile Number
           </label>
-          <input type="number" className="form-control" id="mobile" name='number2' value={values.number2} onChange={handleChange} />
-          {errors.number2 && <p>{errors.number2}</p>}
+          <input
+            type="number"
+            className="form-control"
+            id="mobile"
+            name="number2"
+            value={values.number2}
+            onChange={handleChange}
+          />
+          {errors.number2 && (
+            <p className={`text-danger mb-0`}>{errors.number2}</p>
+          )}
         </div>
-        <hr />
-        <div className="col-md-5 border border-dark">
-          <div class="form-check">
+
+        <div className="col-6">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="flexRadioDefault"
               id="flexRadioDefault1"
             />
-            <label class="form-check-label" for="flexRadioDefault1">
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
               <h5>Free Shipping</h5>
               <p>Between 2-5 Working Days</p>
             </label>
           </div>
         </div>
-        <div className="col-md-2"></div>
-        <div className="col-md-5 border border-dark">
-          <div class="form-check">
+        <div className="col-6">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="flexRadioDefault"
               id="flexRadioDefault2"
             />
-            <label class="form-check-label" for="flexRadioDefault2">
+            <label className="form-check-label" htmlFor="flexRadioDefault2">
               <h5>Next day Delievery</h5>
               <p>24 hours from checkout</p>
             </label>
           </div>
         </div>
- 
- 
-        <div className="col-12">
-          <button type="submit" className="btn btn-primary" 
-          >
-            Next
-          </button>
+
+        <div className={`d-flex justify-content-start`}>
+          <div className="me-3 mb-3 ">
+            <button
+              type="submit"
+              className="btn btn-primary btn-success px-5 py-2 me-3"
+            >
+              Submit
+            </button>
+          </div>
+          <div className={`d-inline-block`}>
+            <button
+              type="submit"
+              className="btn btn-secondary px-5 py-2"
+              onClick={() => {
+                setToggleState(1);
+              }}
+            >
+              Back
+            </button>
+          </div>
         </div>
       </form>
     </div>
   );
 };
- 
+
 export default FormSignup;
- 
- 

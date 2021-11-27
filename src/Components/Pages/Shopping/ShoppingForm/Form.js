@@ -1,13 +1,12 @@
-import React from 'react'
-import FormSignup from './FormSignup'
+import React from "react";
+import FormSignup from "./FormSignup";
 
-const Form = () => {
-    return (
-        <div>
-           <FormSignup name="chla de" />
-        </div>
-    )
-}
+const Form = ({ setToggleState }) => {
+  return (
+    <div>
+      <FormSignup setToggleState={setToggleState} />
+    </div>
+  );
+};
 
-export default Form
-
+export default Form;
